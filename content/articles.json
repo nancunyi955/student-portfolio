@@ -1,0 +1,63 @@
+{
+  "articles": [
+    {
+      "id": "learning-after-ai",
+      "title": "When AI Can Answer Everything, What Should We Still Learn?",
+      "zh": "当 AI 能回答所有问题，我们还需要学习什么？",
+      "date": "2026-06-07",
+      "day": "07",
+      "month": "JUN",
+      "type": "THINKING",
+      "typeZh": "思考笔记",
+      "readTime": "6 MIN",
+      "deck": "The value of learning is shifting from remembering answers to forming better questions, judgment and original connections.",
+      "accent": "#c8ff48",
+      "featured": true,
+      "sections": [
+        {"title": "Answers are becoming cheap", "en": "AI can explain a formula, summarize a book and suggest a plan in seconds. That does not make learning useless. It changes where the hard and valuable part begins.", "zh": "答案正在变得廉价，但这并不意味着学习失去价值，而是学习中真正困难和有价值的部分正在移动。"},
+        {"title": "Judgment is still earned", "en": "A fluent answer can still be wrong, shallow or irrelevant. To judge it, I need enough knowledge to notice what is missing and understand consequences.", "zh": "流畅的答案仍然可能错误、肤浅或答非所问。判断力无法完全外包。"},
+        {"title": "Learning creates taste", "en": "The more examples I study, the better I can recognize clarity, originality and craft. AI can generate options, but choosing what deserves to exist requires taste.", "zh": "学习也在形成品味：知道什么是清楚、原创和真正做得好的。"},
+        {"title": "My new rule", "en": "I will use AI to move faster through repetition, but not to skip confusion too early. Confusion is often the doorway to a better question.", "zh": "让 AI 减少重复劳动，但不要过早跳过困惑，因为困惑往往通向更好的问题。"}
+      ]
+    },
+    {
+      "id": "first-product",
+      "title": "I Failed My First Product—and Learned Who to Ask First",
+      "zh": "我做砸了第一个产品，但学会了先问谁需要",
+      "date": "2026-05-28",
+      "day": "28",
+      "month": "MAY",
+      "type": "RETROSPECTIVE",
+      "typeZh": "项目复盘",
+      "readTime": "4 MIN",
+      "deck": "I spent too long making something polished before discovering that the problem was mostly in my imagination.",
+      "accent": "#7657ff",
+      "featured": true,
+      "sections": [
+        {"title": "The exciting idea", "en": "I began with a feature list and a name. That felt like progress, but I had not spoken to the people I hoped would use it.", "zh": "我从功能清单和名字开始，因为看得见的制作很像进度，但我还没有和真正可能使用它的人聊过。"},
+        {"title": "The uncomfortable test", "en": "When I finally showed the prototype, people were polite. They understood it, but nobody had the problem often enough to change their habits.", "zh": "当我展示原型时，大家都很礼貌，却没有足够强烈的问题需要改变习惯。"},
+        {"title": "The lesson", "en": "A prototype should test the riskiest assumption, not demonstrate how much work I have done. Next time I will test the need first.", "zh": "原型应该验证最危险的假设，而不是证明投入了多少时间。"}
+      ]
+    },
+    {
+      "id": "stories-travel",
+      "title": "Why Some Stories Travel Further Than Others",
+      "zh": "为什么有些故事传播得更远？",
+      "date": "2026-05-12",
+      "day": "12",
+      "month": "MAY",
+      "type": "MEDIA STUDY",
+      "typeZh": "媒体拆解",
+      "readTime": "8 MIN",
+      "deck": "Shareable stories give people a useful feeling, idea or identity to pass forward—not merely something to watch.",
+      "accent": "#ff623e",
+      "featured": true,
+      "sections": [
+        {"title": "A story needs a carrier", "en": "Content does not travel by itself. A person chooses to carry it into another conversation.", "zh": "内容不会自己传播，是人把它带进下一场对话。"},
+        {"title": "Compression without emptiness", "en": "Strong digital stories remove everything that does not serve the central change. They are compressed, but not hollow.", "zh": "好的数字叙事会删除不服务于核心变化的部分。它被压缩，却不空洞。"},
+        {"title": "Give the audience a role", "en": "The most memorable pieces leave a small gap for the viewer—to recognize themselves, disagree or tell someone else.", "zh": "最容易被记住的内容，会给观众留一个位置。"},
+        {"title": "A practical checklist", "en": "Before publishing, I ask: Is there one clear change? Is there one detail worth remembering?", "zh": "发布前，我会检查：是否有清晰变化？是否有值得记住的细节？"}
+      ]
+    }
+  ]
+}

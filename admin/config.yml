@@ -1,0 +1,84 @@
+backend:
+  name: git-gateway
+  branch: main
+
+local_backend: true
+publish_mode: simple
+media_folder: uploads
+public_folder: /uploads
+
+collections:
+  - name: site_content
+    label: Content / 内容管理
+    files:
+      - name: projects
+        label: Projects / 项目作品
+        file: content/projects.json
+        format: json
+        fields:
+          - name: projects
+            label: Published projects / 已发布作品
+            label_singular: Project / 作品
+            widget: list
+            summary: "{{fields.title}} — {{fields.track}}"
+            fields:
+              - { name: id, label: URL ID / 链接标识, widget: string, hint: "Use lowercase English and hyphens, e.g. my-first-project" }
+              - { name: title, label: English title / 英文标题, widget: string }
+              - { name: zh, label: Chinese title / 中文标题, widget: string }
+              - { name: summary, label: Full summary / 完整简介, widget: text }
+              - { name: short, label: Card summary / 卡片简介, widget: string }
+              - { name: type, label: Project type / 项目类型, widget: string }
+              - { name: track, label: Learning track / 学习方向, widget: select, options: [English, Artificial Intelligence, Digital Media, Business] }
+              - { name: category, label: Filter category / 筛选分类, widget: select, options: [english, ai, media, business] }
+              - { name: mark, label: Cover mark / 封面符号, widget: string, default: "↗" }
+              - { name: accent, label: Accent color / 强调色, widget: color, default: "#c8ff48" }
+              - { name: tone, label: Card color / 卡片颜色, widget: select, options: [purple, orange, blue, lime] }
+              - { name: oneLine, label: Cover statement / 封面观点, widget: text }
+              - { name: question, label: The question / 项目问题, widget: text }
+              - name: process
+                label: Process steps / 项目过程
+                widget: list
+                field: { name: step, label: Step / 步骤, widget: text }
+              - { name: result, label: Result / 项目结果, widget: text }
+              - { name: output, label: Output / 项目产出, widget: string }
+              - { name: lessons, label: Lessons / 项目复盘, widget: text }
+              - name: tags
+                label: Tags / 标签
+                widget: list
+                field: { name: tag, label: Tag / 标签, widget: string }
+              - { name: featured, label: Show on homepage / 首页展示, widget: boolean, default: true }
+              - { name: next, label: Next project ID / 下一个作品标识, widget: string, required: false }
+              - { name: nextTitle, label: Next project title / 下一个作品标题, widget: string, required: false }
+
+      - name: articles
+        label: Journal / 成长日志
+        file: content/articles.json
+        format: json
+        fields:
+          - name: articles
+            label: Published entries / 已发布日志
+            label_singular: Journal entry / 日志
+            widget: list
+            summary: "{{fields.date}} — {{fields.title}}"
+            fields:
+              - { name: id, label: URL ID / 链接标识, widget: string, hint: "Use lowercase English and hyphens" }
+              - { name: title, label: English title / 英文标题, widget: string }
+              - { name: zh, label: Chinese title / 中文标题, widget: string }
+              - { name: date, label: Publish date / 发布日期, widget: datetime, date_format: "YYYY-MM-DD", time_format: false, format: "YYYY-MM-DD" }
+              - { name: day, label: Day / 日期数字, widget: string, hint: "Two digits, e.g. 07" }
+              - { name: month, label: Month / 英文月份, widget: select, options: [JAN, FEB, MAR, APR, MAY, JUN, JUL, AUG, SEP, OCT, NOV, DEC] }
+              - { name: type, label: English category / 英文分类, widget: string }
+              - { name: typeZh, label: Chinese category / 中文分类, widget: string }
+              - { name: readTime, label: Read time / 阅读时间, widget: string, default: "5 MIN" }
+              - { name: deck, label: Introduction / 导语, widget: text }
+              - { name: accent, label: Accent color / 强调色, widget: color, default: "#c8ff48" }
+              - { name: featured, label: Show on homepage / 首页展示, widget: boolean, default: true }
+              - name: sections
+                label: Article sections / 文章段落
+                label_singular: Section / 段落
+                widget: list
+                summary: "{{fields.title}}"
+                fields:
+                  - { name: title, label: Section title / 小标题, widget: string }
+                  - { name: en, label: English text / 英文正文, widget: text }
+                  - { name: zh, label: Chinese text / 中文正文, widget: text }
