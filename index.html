@@ -9,6 +9,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Noto+Sans+SC:wght@400;500;700;900&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="styles.css" />
+    <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
   </head>
   <body>
     <div class="noise" aria-hidden="true"></div>
@@ -141,5 +142,16 @@
 
     <footer class="footer shell"><a class="logo" href="index.html"><span class="logo-mark">L↑</span><span>LEVEL UP LAB</span></a><p>Stay curious. Keep building. <small>持续好奇，持续创造。</small> © 2026</p><div class="footer-links"><a href="admin/">Publish <small>发布后台</small></a><a href="#top">Back to top <small>回到顶部</small> ↑</a></div></footer>
     <script src="script.js"></script>
+    <script>
+      if (window.netlifyIdentity) {
+        window.netlifyIdentity.on('init', (user) => {
+          if (!user) {
+            window.netlifyIdentity.on('login', () => {
+              window.location.href = '/admin/';
+            });
+          }
+        });
+      }
+    </script>
   </body>
 </html>
