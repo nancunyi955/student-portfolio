@@ -8,8 +8,8 @@ media_folder: uploads
 public_folder: /uploads
 
 collections:
-  - name: site_content
-    label: Content / 内容管理
+  - name: portfolio
+    label: Portfolio Content / 作品集内容
     files:
       - name: projects
         label: Projects / 项目作品
@@ -17,38 +17,76 @@ collections:
         format: json
         fields:
           - name: projects
-            label: Published projects / 已发布作品
-            label_singular: Project / 作品
+            label: Projects / 项目作品
+            label_singular: Project / 项目作品
             widget: list
-            summary: "{{fields.title}} — {{fields.track}}"
+            minimize_collapsed: true
+            summary: "{{fields.basic.title}} — {{fields.basic.track}}"
             fields:
-              - { name: id, label: URL ID / 链接标识, widget: string, hint: "Use lowercase English and hyphens, e.g. my-first-project" }
-              - { name: title, label: English title / 英文标题, widget: string }
-              - { name: zh, label: Chinese title / 中文标题, widget: string }
-              - { name: summary, label: Full summary / 完整简介, widget: text }
-              - { name: short, label: Card summary / 卡片简介, widget: string }
-              - { name: type, label: Project type / 项目类型, widget: string }
-              - { name: track, label: Learning track / 学习方向, widget: select, options: [English, Artificial Intelligence, Digital Media, Business] }
-              - { name: category, label: Filter category / 筛选分类, widget: select, options: [english, ai, media, business] }
-              - { name: mark, label: Cover mark / 封面符号, widget: string, default: "↗" }
-              - { name: accent, label: Accent color / 强调色, widget: color, default: "#c8ff48" }
-              - { name: tone, label: Card color / 卡片颜色, widget: select, options: [purple, orange, blue, lime] }
-              - { name: oneLine, label: Cover statement / 封面观点, widget: text }
-              - { name: question, label: The question / 项目问题, widget: text }
-              - name: process
-                label: Process steps / 项目过程
-                widget: list
-                field: { name: step, label: Step / 步骤, widget: text }
-              - { name: result, label: Result / 项目结果, widget: text }
-              - { name: output, label: Output / 项目产出, widget: string }
-              - { name: lessons, label: Lessons / 项目复盘, widget: text }
-              - name: tags
-                label: Tags / 标签
-                widget: list
-                field: { name: tag, label: Tag / 标签, widget: string }
-              - { name: featured, label: Show on homepage / 首页展示, widget: boolean, default: true }
-              - { name: next, label: Next project ID / 下一个作品标识, widget: string, required: false }
-              - { name: nextTitle, label: Next project title / 下一个作品标题, widget: string, required: false }
+              - name: basic
+                label: Basic Info / 基础信息
+                widget: object
+                collapsed: false
+                fields:
+                  - { name: title, label: English Title / 英文标题, widget: string }
+                  - { name: zh, label: Chinese Title / 中文标题, widget: string }
+                  - name: slug
+                    label: URL Slug / 链接名称
+                    widget: string
+                    hint: "Lowercase English and hyphens only, e.g. ai-study-partner / 仅使用小写英文与连字符"
+                    pattern: ["^[a-z0-9]+(?:-[a-z0-9]+)*$", "Use lowercase letters, numbers and hyphens / 请使用小写字母、数字和连字符"]
+                  - name: track
+                    label: Track / 学习方向
+                    widget: select
+                    options:
+                      - { label: English / 英语, value: english }
+                      - { label: AI / 人工智能, value: ai }
+                      - { label: Digital Media / 数字媒体, value: media }
+                      - { label: Business / 商业, value: business }
+                  - name: tags
+                    label: Tags / 标签
+                    widget: list
+                    required: false
+                    field: { name: tag, label: Tag / 标签, widget: string }
+                  - { name: featured, label: Featured on Home / 首页推荐, widget: boolean, default: false }
+
+              - name: card
+                label: Card Display / 卡片展示
+                widget: object
+                collapsed: false
+                fields:
+                  - { name: summary, label: Card Summary / 卡片简介, widget: text }
+                  - { name: mark, label: Cover Mark / 封面符号, widget: string, default: "↗", hint: "A short mark such as AI, Aa, ¥ or ↗ / 可填写简短符号" }
+                  - name: color
+                    label: Color / 卡片颜色
+                    widget: select
+                    default: lime
+                    options:
+                      - { label: Lime / 青柠绿, value: lime }
+                      - { label: Purple / 紫色, value: purple }
+                      - { label: Blue / 蓝色, value: blue }
+                      - { label: Orange / 橙色, value: orange }
+
+              - name: content
+                label: Project Content / 项目内容
+                widget: object
+                collapsed: false
+                fields:
+                  - { name: objective, label: Objective / 项目目标, widget: text }
+                  - name: tools
+                    label: Tools Used / 使用工具
+                    widget: list
+                    required: false
+                    field: { name: tool, label: Tool / 工具, widget: string }
+                  - name: process
+                    label: Process / 项目过程
+                    widget: list
+                    field: { name: step, label: Step / 步骤, widget: text }
+                  - { name: result, label: Result / 项目结果, widget: text }
+                  - { name: learned, label: What I Learned / 我的收获, widget: text }
+                  - { name: nextStep, label: Next Step / 下一步, widget: text, required: false }
+
+              - { name: body, label: Body / 正文, widget: markdown, required: false, hint: "Write the full story, notes or evidence here / 在这里记录完整故事、笔记或证据" }
 
       - name: articles
         label: Journal / 成长日志
@@ -56,29 +94,29 @@ collections:
         format: json
         fields:
           - name: articles
-            label: Published entries / 已发布日志
-            label_singular: Journal entry / 日志
+            label: Journal / 成长日志
+            label_singular: Journal Entry / 成长日志
             widget: list
+            minimize_collapsed: true
             summary: "{{fields.date}} — {{fields.title}}"
             fields:
-              - { name: id, label: URL ID / 链接标识, widget: string, hint: "Use lowercase English and hyphens" }
-              - { name: title, label: English title / 英文标题, widget: string }
-              - { name: zh, label: Chinese title / 中文标题, widget: string }
-              - { name: date, label: Publish date / 发布日期, widget: datetime, date_format: "YYYY-MM-DD", time_format: false, format: "YYYY-MM-DD" }
-              - { name: day, label: Day / 日期数字, widget: string, hint: "Two digits, e.g. 07" }
-              - { name: month, label: Month / 英文月份, widget: select, options: [JAN, FEB, MAR, APR, MAY, JUN, JUL, AUG, SEP, OCT, NOV, DEC] }
-              - { name: type, label: English category / 英文分类, widget: string }
-              - { name: typeZh, label: Chinese category / 中文分类, widget: string }
-              - { name: readTime, label: Read time / 阅读时间, widget: string, default: "5 MIN" }
-              - { name: deck, label: Introduction / 导语, widget: text }
-              - { name: accent, label: Accent color / 强调色, widget: color, default: "#c8ff48" }
-              - { name: featured, label: Show on homepage / 首页展示, widget: boolean, default: true }
-              - name: sections
-                label: Article sections / 文章段落
-                label_singular: Section / 段落
+              - { name: title, label: English Title / 英文标题, widget: string }
+              - { name: zh, label: Chinese Title / 中文标题, widget: string }
+              - { name: date, label: Date / 日期, widget: datetime, date_format: "YYYY-MM-DD", time_format: false, format: "YYYY-MM-DD" }
+              - name: track
+                label: Track / 学习方向
+                widget: select
+                options:
+                  - { label: English / 英语, value: english }
+                  - { label: AI / 人工智能, value: ai }
+                  - { label: Digital Media / 数字媒体, value: media }
+                  - { label: Business / 商业, value: business }
+              - name: tags
+                label: Tags / 标签
                 widget: list
-                summary: "{{fields.title}}"
-                fields:
-                  - { name: title, label: Section title / 小标题, widget: string }
-                  - { name: en, label: English text / 英文正文, widget: text }
-                  - { name: zh, label: Chinese text / 中文正文, widget: text }
+                required: false
+                field: { name: tag, label: Tag / 标签, widget: string }
+              - { name: summary, label: Summary / 摘要, widget: text }
+              - { name: body, label: Body / 正文, widget: markdown }
+              - { name: reflection, label: Reflection / 复盘反思, widget: markdown, required: false }
+              - { name: nextStep, label: Next Step / 下一步, widget: text, required: false }

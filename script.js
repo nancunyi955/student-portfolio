@@ -1,6 +1,100 @@
 const escapeHTML = (value = '') => String(value).replace(/[&<>'"]/g, (char) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', "'": '&#39;', '"': '&quot;' }[char]));
 const query = (selector) => document.querySelector(selector);
 
+const trackMeta = {
+  english: { label: 'English', zh: '英语', category: 'english', accent: '#c8ff48' },
+  ai: { label: 'Artificial Intelligence', zh: '人工智能', category: 'ai', accent: '#7657ff' },
+  media: { label: 'Digital Media', zh: '数字媒体', category: 'media', accent: '#ff623e' },
+  business: { label: 'Business', zh: '商业', category: 'business', accent: '#67d7ff' }
+};
+
+const colorAccents = { lime: '#c8ff48', purple: '#7657ff', blue: '#67d7ff', orange: '#ff623e' };
+
+function slugify(value = '') {
+  return String(value).toLowerCase().trim().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '') || 'entry';
+}
+
+function cleanMarkdown(value = '') {
+  return String(value)
+    .replace(/!\[[^\]]*\]\([^)]*\)/g, '')
+    .replace(/\[([^\]]+)\]\([^)]*\)/g, '$1')
+    .replace(/[*_`>#-]/g, '')
+    .replace(/\n+/g, ' ')
+    .trim();
+}
+
+function sectionsFromMarkdown(body = '', reflection = '', nextStep = '') {
+  const chunks = String(body).trim().split(/\n(?=##?\s+)/).filter(Boolean);
+  const sections = chunks.map((chunk, index) => {
+    const lines = chunk.trim().split('\n');
+    const heading = lines[0].match(/^##?\s+(.+)/);
+    return {
+      title: heading ? heading[1].trim() : index === 0 ? 'Journal note' : `Part ${index + 1}`,
+      en: cleanMarkdown((heading ? lines.slice(1) : lines).join('\n')),
+      zh: ''
+    };
+  }).filter((section) => section.en);
+  if (reflection) sections.push({ title: 'Reflection / 复盘反思', en: cleanMarkdown(reflection), zh: '' });
+  if (nextStep) sections.push({ title: 'Next Step / 下一步', en: cleanMarkdown(nextStep), zh: '' });
+  return sections.length ? sections : [{ title: 'Journal note', en: 'This entry is being updated.', zh: '这篇日志正在更新中。' }];
+}
+
+function normalizeProject(project) {
+  if (!project.basic) return project;
+  const basic = project.basic || {};
+  const card = project.card || {};
+  const content = project.content || {};
+  const meta = trackMeta[basic.track] || trackMeta.english;
+  const tools = Array.isArray(content.tools) ? content.tools : [];
+  return {
+    id: basic.slug || slugify(basic.title),
+    title: basic.title || 'Untitled Project',
+    zh: basic.zh || '',
+    summary: card.summary || '',
+    short: card.summary || '',
+    type: `${meta.label} Project`,
+    track: meta.label,
+    category: meta.category,
+    mark: card.mark || '↗',
+    accent: colorAccents[card.color] || meta.accent,
+    tone: card.color || 'lime',
+    oneLine: content.objective || card.summary || '',
+    question: content.objective || '',
+    process: content.process || [],
+    result: content.result || '',
+    output: tools.join(' · ') || 'Project notes',
+    lessons: [content.learned, content.nextStep ? `Next: ${content.nextStep}` : ''].filter(Boolean).join(' '),
+    tags: basic.tags || [],
+    featured: basic.featured !== false,
+    body: project.body || ''
+  };
+}
+
+function normalizeArticle(article) {
+  if (article.sections) return article;
+  const date = String(article.date || '');
+  const [, month = '01', day = '01'] = date.split('-');
+  const months = ['JAN', 'FEB', 'MAR', 'APR', 'MAY', 'JUN', 'JUL', 'AUG', 'SEP', 'OCT', 'NOV', 'DEC'];
+  const meta = trackMeta[article.track] || trackMeta.english;
+  const wordCount = String(article.body || '').trim().split(/\s+/).filter(Boolean).length;
+  return {
+    id: slugify(article.title),
+    title: article.title || 'Untitled Entry',
+    zh: article.zh || '',
+    date,
+    day,
+    month: months[Math.max(0, Number(month) - 1)],
+    type: meta.label.toUpperCase(),
+    typeZh: meta.zh,
+    readTime: `${Math.max(1, Math.ceil(wordCount / 180))} MIN`,
+    deck: article.summary || '',
+    accent: meta.accent,
+    featured: true,
+    tags: article.tags || [],
+    sections: sectionsFromMarkdown(article.body, article.reflection, article.nextStep)
+  };
+}
+
 const revealObserver = 'IntersectionObserver' in window ? new IntersectionObserver((entries) => {
   entries.forEach((entry) => {
     if (entry.isIntersecting) {
@@ -155,12 +249,14 @@ async function loadPublishedContent() {
   ]);
   if (!projectResponse.ok || !articleResponse.ok) throw new Error('Published content could not be loaded.');
   const [{ projects }, { articles }] = await Promise.all([projectResponse.json(), articleResponse.json()]);
-  renderHomeProjects(projects || []);
-  renderProjectLibrary(projects || []);
-  renderHomeJournal(articles || []);
-  renderJournalArchive(articles || []);
-  renderProjectDetail(projects || []);
-  renderArticleDetail(articles || []);
+  const normalizedProjects = (projects || []).map(normalizeProject);
+  const normalizedArticles = (articles || []).map(normalizeArticle);
+  renderHomeProjects(normalizedProjects);
+  renderProjectLibrary(normalizedProjects);
+  renderHomeJournal(normalizedArticles);
+  renderJournalArchive(normalizedArticles);
+  renderProjectDetail(normalizedProjects);
+  renderArticleDetail(normalizedArticles);
 }
 
 loadPublishedContent().catch((error) => {
