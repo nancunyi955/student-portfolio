@@ -171,3 +171,23 @@ h1 span { position:relative; z-index:0; } h1 span::after { content:""; position:
   .detail-hero { padding-top:55px; }.detail-hero h1 { font-size:52px; }.detail-facts { grid-template-columns:1fr; }.detail-facts div { border-bottom:1px solid var(--line); }.project-cover { min-height:0; }.project-cover p { font-size:28px; }.cover-mark { width:140px; height:140px; font-size:45px; }.case-study { padding:80px 0; }.case-study h2 { font-size:32px; }.case-study article section>p:not(.eyebrow) { font-size:15px; }.next-project strong { font-size:27px; }
   .article-hero { padding-top:55px; }.article-hero h1 { font-size:49px; }.article-deck { font-size:17px; }.article-color { height:190px; font-size:80px; }.article-body { padding:70px 0; }.article-body section { padding:0 0 65px 0; }.article-body section>span { position:static; display:block; margin-bottom:14px; }.article-body h2 { font-size:29px; }.article-body p { font-size:15px; }.article-end>div { align-items:flex-start; flex-direction:column; gap:20px; }
 }
+
+/* Mobile navigation; desktop layout remains unchanged */
+.nav-toggle { display:none; appearance:none; border:1px solid var(--ink); background:var(--paper); color:var(--ink); padding:8px 12px; font:500 11px "DM Mono",monospace; cursor:pointer; }
+.nav-toggle small { margin-top:2px; color:#777; font:500 9px "Noto Sans SC",sans-serif; }
+
+@media (max-width:850px) {
+  .nav { position:relative; z-index:40; }
+  .nav-toggle { display:flex; flex-direction:column; align-items:center; margin-left:auto; }
+  .nav-cta { margin-left:12px; }
+  .nav nav { position:absolute; top:100%; left:0; right:0; display:none; flex-direction:column; gap:0; background:var(--paper); border:1px solid var(--ink); box-shadow:6px 6px 0 var(--lime); }
+  .nav.menu-open nav { display:flex; }
+  .nav nav a { padding:16px; border-bottom:1px solid var(--line); font-weight:700; }
+  .nav nav a:last-child { border-bottom:0; }
+  .nav nav a small { text-align:left; }
+  .inner-nav nav a.active::after { left:16px; right:16px; bottom:0; }
+}
+
+@media (max-width:560px) {
+  .nav-cta { display:none; }
+}

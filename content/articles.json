@@ -1,22 +1,15 @@
 {
   "articles": [
     {
-      "title": "When AI Can Answer Everything, What Should We Still Learn?",
-      "zh": "当 AI 能回答所有问题，我们还需要学习什么？",
-      "date": "2026-06-07",
-      "track": "ai",
-      "tags": ["AI", "LEARNING", "THINKING"],
-      "summary": "The value of learning is shifting from remembering answers to forming better questions, judgment and original connections.",
-      "body": "## Answers are becoming cheap\n\nAI can explain a formula, summarize a book and suggest a plan in seconds. That does not make learning useless. It changes where the hard and valuable part begins.\n\n答案正在变得廉价，但这并不意味着学习失去价值，而是学习中真正困难和有价值的部分正在移动。\n\n## Judgment is still earned\n\nA fluent answer can still be wrong, shallow or irrelevant. To judge it, I need enough knowledge to notice what is missing and understand consequences.\n\n流畅的答案仍然可能错误、肤浅或答非所问。判断力无法完全外包。\n\n## Learning creates taste\n\nThe more examples I study, the better I can recognize clarity, originality and craft. AI can generate options, but choosing what deserves to exist requires taste.\n\n学习也在形成品味：知道什么是清楚、原创和真正做得好的。",
-      "reflection": "I will use AI to move faster through repetition, but not to skip confusion too early. Confusion is often the doorway to a better question. / 让 AI 减少重复劳动，但不要过早跳过困惑。",
-      "nextStep": "For the next month, record one question I improved after using AI instead of only recording the answer. / 下个月记录被 AI 帮助改进的问题，而不只记录答案。"
-    },
-    {
       "title": "I Failed My First Product—and Learned Who to Ask First",
       "zh": "我做砸了第一个产品，但学会了先问谁需要",
       "date": "2026-05-28",
       "track": "business",
-      "tags": ["PRODUCT", "BUSINESS", "RETROSPECTIVE"],
+      "tags": [
+        "PRODUCT",
+        "BUSINESS",
+        "RETROSPECTIVE"
+      ],
       "summary": "I spent too long making something polished before discovering that the problem was mostly in my imagination.",
       "body": "## The exciting idea\n\nI began with a feature list and a name. That felt like progress, but I had not spoken to the people I hoped would use it.\n\n我从功能清单和名字开始，因为看得见的制作很像进度，但我还没有和真正可能使用它的人聊过。\n\n## The uncomfortable test\n\nWhen I finally showed the prototype, people were polite. They understood it, but nobody had the problem often enough to change their habits.\n\n当我展示原型时，大家都很礼貌，却没有足够强烈的问题需要改变习惯。",
       "reflection": "A prototype should test the riskiest assumption, not demonstrate how much work I have done. / 原型应该验证最危险的假设，而不是证明投入了多少时间。",
@@ -27,11 +20,30 @@
       "zh": "为什么有些故事传播得更远？",
       "date": "2026-05-12",
       "track": "media",
-      "tags": ["DIGITAL MEDIA", "STORYTELLING", "RESEARCH"],
+      "tags": [
+        "DIGITAL MEDIA",
+        "STORYTELLING",
+        "RESEARCH"
+      ],
       "summary": "Shareable stories give people a useful feeling, idea or identity to pass forward—not merely something to watch.",
       "body": "## A story needs a carrier\n\nContent does not travel by itself. A person chooses to carry it into another conversation.\n\n内容不会自己传播，是人把它带进下一场对话。\n\n## Compression without emptiness\n\nStrong digital stories remove everything that does not serve the central change. They are compressed, but not hollow.\n\n好的数字叙事会删除不服务于核心变化的部分。它被压缩，却不空洞。\n\n## Give the audience a role\n\nThe most memorable pieces leave a small gap for the viewer—to recognize themselves, disagree or tell someone else.\n\n最容易被记住的内容，会给观众留一个位置。",
       "reflection": "A shareable story offers the audience something useful to carry forward, not merely something to watch. / 可传播的故事会给观众一个值得带走的想法或感受。",
       "nextStep": "Before publishing, check whether there is one clear change and one detail worth remembering. / 发布前检查是否有清晰变化和一个值得记住的细节。"
+    },
+    {
+      "title": "My Personal Website Is Live—with a Little Help from AI",
+      "zh": "在 AI 的帮助下，我的个人网站面世啦",
+      "date": "2026-07-01",
+      "track": "ai",
+      "tags": [
+        "AI",
+        "BUILDING",
+        "MILESTONE"
+      ],
+      "summary": "On July 1, 2026, an idea became a real place on the internet—and I learned that creating with AI still requires choices, patience and a voice of my own.",
+      "body": "## From a blank page to a real address\n\nToday, my personal website officially went live. What began as a vague idea now has pages people can open, stories they can read and a small corner of the internet that belongs to me.\n\n今天，我的个人网站正式面世了。一个原本模糊的想法，终于变成了别人可以打开、阅读和探索的真实空间。\n\n## AI was my teammate, not autopilot\n\nAI helped me write code, organize content and solve problems faster. But I still had to decide what the website should say, how it should feel and which details were truly mine. The most valuable part was learning to explain what I wanted, review the result and keep improving it.\n\nAI 帮我编写代码、整理内容，也让我更快地解决问题。但网站要表达什么、呈现怎样的感觉、哪些细节真正属于我，仍然需要我来选择。最有价值的过程，是学会说清自己的想法、检查结果，并一次次把它变得更好。\n\n## Going live is only the beginning\n\nA website is never completely finished. From today on, this will be a living record of what I learn, build and rethink. The first version does not need to be perfect—it only needs to exist, so the next version has somewhere to begin.\n\n网站上线不是终点，而是开始。从今天起，这里会持续记录我的学习、创造和思考变化。第一版不必完美，重要的是它已经存在，下一次进步也终于有了起点。",
+      "reflection": "Today I learned that AI can shorten the distance between an idea and a finished work, but direction and judgment still have to come from me. / 今天我明白了：AI 可以缩短想法与作品之间的距离，但方向和判断仍然要由我负责。",
+      "nextStep": "Replace the remaining sample details, publish my first real project and keep adding one honest learning note each week. / 完善网站中的个人细节，发布第一个真实项目，并坚持每周记录一条真诚的学习笔记。"
     }
   ]
 }

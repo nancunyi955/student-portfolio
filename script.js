@@ -124,6 +124,32 @@ document.querySelectorAll('a[href^="#"]').forEach((link) => {
   });
 });
 
+
+document.querySelectorAll('.nav-toggle').forEach((button) => {
+  const header = button.closest('.nav');
+  const nav = header?.querySelector('nav');
+  if (!header || !nav) return;
+
+  const closeMenu = () => {
+    header.classList.remove('menu-open');
+    button.setAttribute('aria-expanded', 'false');
+  };
+
+  button.addEventListener('click', () => {
+    const open = header.classList.toggle('menu-open');
+    button.setAttribute('aria-expanded', String(open));
+  });
+  nav.addEventListener('click', (event) => {
+    if (event.target.closest('a')) closeMenu();
+  });
+  document.addEventListener('click', (event) => {
+    if (!header.contains(event.target)) closeMenu();
+  });
+  document.addEventListener('keydown', (event) => {
+    if (event.key === 'Escape') closeMenu();
+  });
+});
+
 const currentPage = document.body.dataset.page;
 if (currentPage) query(`[data-nav="${currentPage}"]`)?.classList.add('active');
 
@@ -168,15 +194,15 @@ function renderProjectLibrary(projects) {
   observeReveals(root);
 }
 
-function sortedArticles(articles) {
-  return [...articles].sort((a, b) => String(b.date).localeCompare(String(a.date)));
+function publicationOrder(articles) {
+  return [...articles];
 }
 
 function renderHomeJournal(articles) {
   const root = query('[data-journal-featured]');
   if (!root) return;
   const visualClasses = ['visual-one', 'visual-two', 'visual-three'];
-  root.innerHTML = sortedArticles(articles).filter((item) => item.featured !== false).slice(0, 3).map((article, index) => `
+  root.innerHTML = publicationOrder(articles).filter((item) => item.featured !== false).slice(0, 3).map((article, index) => `
     <article class="log-card reveal${index ? ` delay-${Math.min(index, 2)}` : ' featured'}">
       <div class="log-visual ${visualClasses[index % visualClasses.length]}"><span>${escapeHTML(article.day)}</span><i></i><b>${escapeHTML(article.month)}</b></div>
       <div class="log-content"><p>${escapeHTML(article.type)} · ${escapeHTML(article.readTime)} <small>${escapeHTML(article.typeZh)}</small></p><h3>${escapeHTML(article.title)}<small>${escapeHTML(article.zh)}</small></h3><a href="article.html?post=${encodeURIComponent(article.id)}">Read entry <small>阅读文章</small> →</a></div>
@@ -187,7 +213,7 @@ function renderHomeJournal(articles) {
 function renderJournalArchive(articles) {
   const root = query('[data-journal-archive]');
   if (!root) return;
-  root.innerHTML = sortedArticles(articles).map((article) => `
+  root.innerHTML = publicationOrder(articles).map((article) => `
     <a class="archive-row reveal" href="article.html?post=${encodeURIComponent(article.id)}">
       <div class="archive-date"><strong>${escapeHTML(article.day)}</strong><span>${escapeHTML(article.month)}<br />${escapeHTML(String(article.date).slice(0, 4))}</span></div>
       <div class="archive-type">${escapeHTML(article.type)}<small>${escapeHTML(article.typeZh)} · ${escapeHTML(article.readTime)}</small></div>
